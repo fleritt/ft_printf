@@ -60,7 +60,7 @@ int	ft_printf(char const *str, ...)
 	return (size);
 }
 
-int main (void)
+/*int main (void)
 {
 	int i;
 	int x;
@@ -74,4 +74,4 @@ int main (void)
 	y = printf("esta es mi funcion: %p, %c\n", h, n);
 	printf("%d %d", x, y);
 	return (0);
-}
+}*/
