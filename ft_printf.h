@@ -21,7 +21,8 @@ int	ft_printf(char const *str, ...);
 int	ft_print_char(char c);
 int	ft_print_str(char *str);
 int	ft_print_nbr(int n);
-int ft_print_unsig(unsigned int n);
-int	ft_print_hex(unsigned int num);
+int	ft_print_unsig(unsigned int n);
+int	ft_print_hex(unsigned int n, unsigned int word);
+int	ft_print_mem(unsigned long long n);
 
 #endif

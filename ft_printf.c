@@ -14,24 +14,30 @@
 
 static int	ft_check_format(char const str, va_list args)
 {
-	int i;
 	if (str == 'c')
 		return (ft_print_char(va_arg(args, int)));
-	if (str == 's')
+	else if (str == 's')
 		return (ft_print_str(va_arg(args, char *)));
-	if (str == 'd' || str == 'i')
+	else if (str == 'p')
+		return (ft_print_mem(va_arg(args, unsigned long long)));
+	else if (str == 'd' || str == 'i')
 		return (ft_print_nbr(va_arg(args, int)));
-	if (str == 'u')
+	else if (str == 'u')
 		return (ft_print_unsig(va_arg(args, unsigned int)));
-	if (str == 'x')
-		return (ft_print_hex(va_arg(args, unsigned int)));
-	if (str == '%')
+	else if (str == 'x')
+		return (ft_print_hex(va_arg(args, unsigned int), 0));
+	else if (str == 'X')
+		return (ft_print_hex(va_arg(args, unsigned int), 1));
+	else if (str == '%')
 		return (ft_print_char('%'));
+	else
+		return (ft_print_char('%'), ft_print_char(str));
 }
+
 int	ft_printf(char const *str, ...)
 {
-    va_list	args;
-    int		i;
+	va_list	args;
+	int		i;
 	int		size;
 
 	i = 0;
@@ -56,10 +62,16 @@ int	ft_printf(char const *str, ...)
 
 int main (void)
 {
-	unsigned int i;
+	int i;
+	int x;
+	int y;
+	char *h = "hola";
+	char n = 'h';
+	char *p = 0;
 
-	i = 23424;
-	printf("%x\n", i);
-	ft_printf("%x", i);
+	i = 123456789;
+	x = ft_printf("esta es mi funcion: %p, %c\n", h, n);
+	y = printf("esta es mi funcion: %p, %c\n", h, n);
+	printf("%d %d", x, y);
 	return (0);
 }

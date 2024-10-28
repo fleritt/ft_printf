@@ -1,56 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_print_mem.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 13:20:15 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/27 13:20:15 by marvin           ###   ########.fr       */
+/*   Created: 2024/10/28 13:04:46 by marvin            #+#    #+#             */
+/*   Updated: 2024/10/28 13:04:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static size_t	ft_count_nbr(int long n)
+static void	ft_convert_mem(unsigned long long n)
 {
-	size_t	j;
-
-	j = 0;
-	if (n <= 0)
+	if (n >= 16)
 	{
-		n *= -1;
-		j++;
+		ft_convert_mem(n / 16);
+		ft_convert_mem(n % 16);
 	}
-	while (n > 0)
+	else
 	{
-		n /= 10;
-		j++;
+		if (n < 10)
+			ft_print_char(n + '0');
+		else
+			ft_print_char(n - 10 + 'a');
 	}
-	return (j);
 }
 
-int	ft_print_nbr(int n)
+int	ft_print_mem(unsigned long long n)
 {
 	int	i;
 
-	if (n == -2147483648)
+	if (n == 0)
+		return (ft_print_str("(nil)"));
+	ft_print_str("0x");
+	if (n != 0)
+		ft_convert_mem(n);
+	i = 2;
+	while (n != 0)
 	{
-		write(1, "-2147483648", 11);
-		return (11);
+		i++;
+		n = n / 16;
 	}
-	i = ft_count_nbr(n);
-	if (n < 0)
-	{
-		ft_print_char('-');
-		n *= -1;
-	}
-	if (n >= 10)
-	{
-		ft_print_nbr(n / 10);
-		ft_print_char(n % 10 + '0');
-	}
-	if (n < 10)
-		ft_print_char(n % 10 + '0');
 	return (i);
 }

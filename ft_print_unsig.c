@@ -27,19 +27,14 @@ static unsigned int	ft_count_nbr(int long n)
 	return (j);
 }
 
-int ft_print_unsig(unsigned int n)
+int	ft_print_unsig(unsigned int n)
 {
-    int i;
-    
-    i = ft_count_nbr(n);
-	if (n < 0)
-	{
-		ft_print_char('-');
-		n *= -1;
-	}
+	int	i;
+
+	i = ft_count_nbr(n);
 	if (n >= 10)
 	{
-		ft_print_nbr(n / 10);
+		ft_print_unsig(n / 10);
 		ft_print_char(n % 10 + '0');
 	}
 	if (n < 10)

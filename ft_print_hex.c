@@ -12,31 +12,35 @@
 
 #include "ft_printf.h"
 
-static void	ft_convert_hex(unsigned int n)
+static void	ft_convert_hex(unsigned int n, unsigned int word)
 {
-   
 	if (n >= 16)
 	{
-		ft_convert_hex(n / 16);
-		ft_convert_hex(n % 16);
+		ft_convert_hex(n / 16, word);
+		ft_convert_hex(n % 16, word);
 	}
 	else
 	{
 		if (n < 10)
 			ft_print_char(n + '0');
 		else
-			ft_print_char(n - 10 + 'a');
+		{
+			if (word == 0)
+				ft_print_char(n - 10 + 'a');
+			else
+				ft_print_char(n - 10 + 'A');
+		}
 	}
 }
 
-int	ft_print_hex(unsigned int n)
+int	ft_print_hex(unsigned int n, unsigned int word)
 {
 	int	i;
 
-    if (n == 0)
+	if (n == 0)
 		return (ft_print_char('0'));
 	else
-		ft_convert_hex(n);
+		ft_convert_hex(n, word);
 	i = 0;
 	while (n != 0)
 	{
